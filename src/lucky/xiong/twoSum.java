@@ -23,7 +23,9 @@ import java.util.Random;
  * 链接：https://leetcode-cn.com/problems/two-sum
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  *
- * 解题思路： https://sqhl.xyz/write
+ * @author XiongJl
+ * @date 2020/5/25 15:20
+ * @url 个人博客 https://sqhl.xyz/article?id=12
  */
 public class twoSum {
 

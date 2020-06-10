@@ -5,7 +5,7 @@ package lucky.xiong;
  *
  * 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
  *
- * 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+ * 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。(XIong: 不进行该假设)
  *
  * 示例：
  *
@@ -17,25 +17,57 @@ package lucky.xiong;
  * 链接：https://leetcode-cn.com/problems/add-two-numbers
  * @author XiongJl
  * @date 2020/6/2 9:42
+ * @url 个人博客 没了！艹，覆盖文章了
  */
 public class addTwoNumbers {
 
     public static void main(String[] args) {
+        ListNode l1 = new ListNode(2);
+        l1.next = new ListNode(0);
+        ListNode l2 = new ListNode(3);
 
+        ListNode res = addTwoNumbers(l1,l2);
+
+        System.out.println(res);
     }
 
     public static ListNode addTwoNumbers(ListNode l1 , ListNode l2){
-        ListNode l1head = l1;
-        ListNode l2head = l2;
 
+        // 返回结果 ,res 用于保存头指针，它的next才是实际值
         ListNode res = new ListNode(0);
-        int a = l1.val+l2.val;
-        if (l1.next!=null){
-            if (l2.next != null){
-
+        ListNode cur = res;
+        // 进位值
+        int putNext = 0;
+        while(l1!=null || l2!=null) {
+            // 加上上一循环的进位值
+            int sum = (l1 == null ? 0 : l1.val) + (l2 == null ? 0 : l2.val) + putNext;
+            if (sum<10){
+                putNext = 0 ;
+            }else{
+                // 超10 进一
+                putNext = 1;
+                // 和保留个位数
+                sum = sum % 10;
             }
+            // 更改当前链表值, 但注意实际上是res的next指针为第一个节点
+            cur.next = new ListNode(sum);
+            // 指向下一个node
+            cur = cur.next;
+
+            // 获取参与计算的下一个node
+            if (l1!=null){
+                l1 =l1.next;
+            }
+            if (l2!=null){
+                l2 = l2.next;
+            }
+
         }
-        return null;
+        // 还有进位
+        if (putNext>0){
+            cur.next = new ListNode(putNext);
+        }
+        return res.next;
     }
     /**
      * 链表类
