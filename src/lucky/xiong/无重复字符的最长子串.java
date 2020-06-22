@@ -35,10 +35,11 @@ public class 无重复字符的最长子串 {
 
     public static void main(String[] args) {
         System.out.println(lengthOfLongestSubstring("abcabcbb"));
-
         System.out.println(lengthOfLongestSubstring("pwwkew"));
         System.out.println(lengthOfLongestSubstring("bbbbb"));
         System.out.println(lengthOfLongestSubstring("au"));
+        System.out.println(lengthOfLongestSubstringV2("au"));
+        System.out.println(lengthOfLongestSubstringV2("pwwkew"));
     }
 
     public static int lengthOfLongestSubstring(String s) {
@@ -75,5 +76,38 @@ public class 无重复字符的最长子串 {
             }
         }
         return max;
+    }
+
+    /**
+     * the right answers on the official website
+     * @param s
+     * @return
+     */
+    public static int lengthOfLongestSubstringV2(String s) {
+        // 哈希集合，记录每个字符串是否出现过
+        Set<Character> set = new HashSet<>();
+        int n = s.length();
+        // 右指针，初始值为0 ， 相当于我们在字符串的左边界的左侧，还没有开始移动 . ans answer 返回值。
+        int rk = 0 , ans = 0;
+        // 循环字符串
+        for (int i = 0;i < n;i++){
+            // 开始循环后，只有当出现重复的字符串才会进行第二次循环 ， 开始找第二个字串。
+            // 因此， 排除的一个字符，继续向后找。
+            if (i !=0){
+                //charAt() 方法用于返回指定索引处的字符。索引范围为从 0 到 length() - 1
+                // 左指针向右移动一格，移除一个字符 ， 此时左指针到右指针必然也不重复
+                set.remove(s.charAt(i-1));
+            }
+            // 右指针下一位不大于字符串长度，且集合中不出现重复子符
+            while(rk+1 < n && !set.contains(s.charAt(rk+1))){
+                // 一直循环右指针+1
+                set.add(s.charAt(rk));
+                rk++;
+            }
+            //max() 方法用于返回两个参数中的最大值。
+            // 第 i 到 rk 个字符是否是更长的无重复子串
+            ans = Math.max(ans,rk - i);
+        }
+        return ans;
     }
 }
