@@ -40,11 +40,24 @@ public class 根据站点字符串出现的次数排序 {
         res.add(r12); res.add(r13); res.add(r14); res.add(r15);res.add(r16);
         res.add(r17); res.add(r18); res.add(r19);
         res.forEach(System.out::println);
-
+        List<TrackOutRes> res2 = new ArrayList<>();
+        res2.add(r7);
+        res2.add(r6);
+        res2.add(r5);
+        res2.add(r4);
+        res2.add(r3);
+        res2.add(r2);
+        res2.add(r1); res2.add(r8); res2.add(r9); res2.add(r10);res2.add(r11);
+        res2.add(r12); res2.add(r13); res2.add(r14); res2.add(r15);res2.add(r16);
+        res2.add(r17); res2.add(r18); res2.add(r19);
+//        res2.forEach(System.out::println);
         trackOutResComparator(res);
+        trackOutResComparatorV2(res2);
         // 排序后
         System.out.println("排序后");
         res.forEach(System.out::println);
+        System.out.println("-----------------------------------------------------");
+        res2.forEach(System.out::println);
     }
 
 
@@ -101,6 +114,10 @@ public class 根据站点字符串出现的次数排序 {
 
 
     static void trackOutResComparator(List<TrackOutRes> results){
+        long startTime = System.currentTimeMillis();
+        if (results.size()<=2){
+            return;
+        }
         // 获取所有已有站点
         Set<String> stations = new HashSet<>();
         results.forEach(r1 -> stations.add(r1.getStationId()));
@@ -125,8 +142,40 @@ public class 根据站点字符串出现的次数排序 {
         // 迭代map ， 使用stationId出现的次数排序
         List<Map.Entry<String,List>> sortList = new ArrayList<>(map.entrySet());
         sortList.sort((Comparator.comparingInt(o -> o.getValue().size())));
-        System.out.println(sortList);
         results.clear();
         sortList.forEach(e -> results.addAll(e.getValue()));
+        long endTime = System.currentTimeMillis(); // 获取结束时间
+        System.out.println("第一种程序运行时间： " + (endTime - startTime) + "ms");
     }
+
+    /**
+     * 尝试优化
+     * @param results
+     */
+    static void trackOutResComparatorV2(List<TrackOutRes> results){
+        long startTime = System.currentTimeMillis();
+        if (results.size()<=2){
+            long endTime = System.currentTimeMillis(); // 获取结束时间
+            System.out.println("第二种程序运行时间： " + (endTime - startTime) + "ms");
+            return;
+        }
+
+        Map<String,List> map = new HashMap<>();
+        for (TrackOutRes res:results){
+            String stationId = res.getStationId();
+            List v ;
+            v = ((v = map.get(stationId)) != null) || map.containsKey(stationId) ? v: new ArrayList<>();
+            v.add(res);
+            map.put(stationId,v);
+        }
+        // 迭代map ， 使用stationId出现的次数排序
+        List<Map.Entry<String,List>> sortList = new ArrayList<>(map.entrySet());
+        sortList.sort((Comparator.comparingInt(o -> o.getValue().size())));
+        results.clear();
+        sortList.forEach(e -> results.addAll(e.getValue()));
+        long endTime = System.currentTimeMillis(); // 获取结束时间
+        System.out.println("第二种程序运行时间： " + (endTime - startTime) + "ms");
+        Optional.empty();
+    }
+
 }
