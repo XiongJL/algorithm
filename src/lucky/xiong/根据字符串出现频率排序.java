@@ -1,7 +1,6 @@
 package lucky.xiong;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 给定一个字符串，请将字符串里的字符按照出现的频率降序排列。
@@ -51,7 +50,8 @@ import java.util.Map;
 public class 根据字符串出现频率排序 {
 
     public static void main(String[] args) {
-
+        String str = "cxzvsfsczxczxcZXcx";
+        System.out.println(frequencySort(str));
     }
 
     /**
@@ -70,7 +70,25 @@ public class 根据字符串出现频率排序 {
         for (char c : s.toCharArray()){
             map.put(c,map.getOrDefault(c,0)+1);
         }
-    return null;
+        // 排序map
+        // 转换成list
+        List<Map.Entry<Character,Integer>> sortList = new ArrayList<>(map.entrySet());
+        sortList.sort(new Comparator<Map.Entry<Character, Integer>>() {
+                          @Override
+                          public int compare(Map.Entry<Character, Integer> o1, Map.Entry<Character, Integer> o2) {
+                              return o2.getValue().compareTo(o1.getValue());
+                          }
+                      });
+
+        System.out.println(sortList);
+
+        StringBuilder sbuilder = new StringBuilder();
+        sortList.forEach(e ->{
+            for(int i=0;i<e.getValue();i++){
+                sbuilder.append(e.getKey());
+            }
+        });
+        return sbuilder.toString();
     }
 
 
