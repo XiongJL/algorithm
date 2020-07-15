@@ -21,7 +21,7 @@ package lucky.xiong;
  * nums2 = [3, 4]
  *
  * 则中位数是 (2 + 3)/2 = 2.5
- *
+ * TODO
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/median-of-two-sorted-arrays
  * @author XiongJl
@@ -31,9 +31,16 @@ package lucky.xiong;
 public class 寻找两个正序数组的中位数 {
 
     public static void main(String[] args) {
+        int[] nums1 = new int[]{1,3};
+        int[] nums2 = new int[]{2};
+        System.out.println(3/2);
 
     }
+    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
 
+        return 0;
+
+    }
 
 
 
