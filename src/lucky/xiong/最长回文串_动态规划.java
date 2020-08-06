@@ -20,23 +20,29 @@ package lucky.xiong;
  * @url https://sqhl.xyz/article?id=26 博客
  *
  */
-public class 最长回文串 {
+public class 最长回文串_动态规划 {
 
     public static void main(String[] args) {
+        Solution solution = new Solution();
 
+        System.out.println(solution.longestPalindrome("aascd上海海上dcdsc"));
     }
 
 
-    class Solution{
+
+
+    static class Solution{
         /**
          * 动态规划
          * @param s
          * @return
          */
         public String longestPalindrome(String s){
+            long startTime = System.currentTimeMillis();
             // 长度小于2 直接返回
             int len = s.length();
             if (len<2){
+                System.out.println("耗时："+ (System.currentTimeMillis() - startTime));
                 return s;
             }
 
@@ -82,6 +88,7 @@ public class 最长回文串 {
                 }
             }
             // 返回值
+            System.out.println("耗时："+ (System.currentTimeMillis() - startTime));
             return s.substring(begin,begin + maxLen);
         }
 
