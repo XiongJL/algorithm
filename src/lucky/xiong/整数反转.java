@@ -50,6 +50,6 @@ public class 整数反转 {
 
     public static void main(String[] args) {
         IntegerReverse integerReverse = new IntegerReverse();
-        System.out.println(integerReverse.reverse(1111111112));
+        System.out.println(integerReverse.reverse(-2147483648));
     }
 }
