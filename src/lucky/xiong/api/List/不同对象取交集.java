@@ -24,6 +24,7 @@ public class 不同对象取交集 {
             System.out.println("生成的b"+b);
             bs.add(b);
         }
+        // 方法1
         List<B> list = bs.stream().filter(b -> {
             List<Boolean> result = as.stream()
                     .map(a -> b.getName().equals(a.getName()))
