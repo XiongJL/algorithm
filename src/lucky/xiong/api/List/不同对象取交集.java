@@ -1,9 +1,7 @@
 package lucky.xiong.api.List;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -15,6 +13,7 @@ public class 不同对象取交集 {
     public static void main(String[] args) {
         List<A> as = new ArrayList<>();
         List<B> bs = new ArrayList<>();
+        Set<B> bss = new HashSet<>();
         for (int i = 0; i < 5;i++){
             A a = new A(i,"xiong"+i,i+"");
             as.add(a);
@@ -24,6 +23,7 @@ public class 不同对象取交集 {
             System.out.println("生成的b"+b);
             bs.add(b);
         }
+        bs.add(new B("xiong"+3,3+"",3));
         // 方法1
         List<B> list = bs.stream().filter(b -> {
             List<Boolean> result = as.stream()
