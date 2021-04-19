@@ -6,5 +6,11 @@ package lucky.xiong.basic;
  */
 public class while循环 {
     public static void main(String[] args) {
+        long c = 1;
+        do {
+            System.out.println("doSomething" + c);
+            c = c-1;
+        }while (c>=0);
+
     }
 }
